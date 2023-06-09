@@ -10,6 +10,7 @@ import {
     LinhaHorizontal,
 } from './styled';
 import bin from '../../assets/bin.png';
+import ListaTarefasConcluidas from '../ListaTarefasConcluidas';
 
 export function ListaTarefas() {
     const [lista, setLista] = useState(['Fazer exercícios', 'Estudar React']);
@@ -32,7 +33,25 @@ export function ListaTarefas() {
         }
     };
 
+    // Adicionando tarefa concluída a lista de tarefas concluídas:
+    // estado
+    const [itemConcluido, setItemConcluido] = useState([]);
+
+    // função
+    const adicionaTarefaConcluida = (tarefa) => {
+        const listaTarefasConcluidas = lista.filter((item) => item === tarefa);
+        const novaListaTarefasConcluidas = [
+            ...itemConcluido,
+            listaTarefasConcluidas,
+        ];
+        setItemConcluido(novaListaTarefasConcluidas);
+    };
+
     const removeTarefa = (tarefa) => {
+        // capturando tarefa concluída:
+        adicionaTarefaConcluida(tarefa);
+
+        //lógica da remoção de tarefa:
         const listaFiltrada = lista.filter((item) => item !== tarefa);
         setLista(listaFiltrada);
     };
@@ -67,6 +86,7 @@ export function ListaTarefas() {
                 </ul>
             </ListaContainer>
             <LinhaHorizontal />
+            <ListaTarefasConcluidas itemConcluido={itemConcluido} />
         </ListaTarefasContainer>
     );
 }
