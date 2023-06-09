@@ -25,6 +25,13 @@ export function ListaTarefas() {
         setNovaTarefa('');
     };
 
+    // Adicionando tarefas com o btn Enter
+    const adicionaTarefaComEnter = (event) => {
+        if (event.keyCode === 13) {
+            adicionaTarefa();
+        }
+    };
+
     const removeTarefa = (tarefa) => {
         const listaFiltrada = lista.filter((item) => item !== tarefa);
         setLista(listaFiltrada);
@@ -37,6 +44,7 @@ export function ListaTarefas() {
                     placeholder="Digite aqui uma tarefa"
                     value={novaTarefa}
                     onChange={onChangeTarefa}
+                    onKeyDown={(event) => adicionaTarefaComEnter(event)}
                 />
                 <AddTaskButton onClick={adicionaTarefa}>
                     Adicionar
