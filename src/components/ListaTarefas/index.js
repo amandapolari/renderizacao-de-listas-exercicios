@@ -21,9 +21,11 @@ export function ListaTarefas() {
     };
 
     const adicionaTarefa = () => {
-        const novaLista = [...lista, novaTarefa];
-        setLista(novaLista);
-        setNovaTarefa('');
+        if (novaTarefa.length && novaTarefa !== ' ') {
+            const novaLista = [...lista, novaTarefa];
+            setLista(novaLista);
+            setNovaTarefa('');
+        }
     };
 
     // Adicionando tarefas com o btn Enter
